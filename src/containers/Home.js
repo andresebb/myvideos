@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Search from "./Search";
+import Search from "../components/Search";
 import "../assets/styles/App.scss";
-import Carousel from "./Carousel";
-import Categories from "./Categories";
-import Item from "./Item";
-import Footer from "./Footer";
+import Carousel from "../components/Carousel";
+import Categories from "../components/Categories";
+import Item from "../components/Item";
 
-const App = () => {
+const Home = () => {
   const [tendencies, setTendencies] = useState([]);
   const [myList, setMyList] = useState([]);
   const [originals, setOriginals] = useState([]);
@@ -44,7 +42,6 @@ const App = () => {
 
   return (
     <div>
-      <Header />
       <Search />
 
       {myList.length > 0 && (
@@ -82,9 +79,8 @@ const App = () => {
           ))}
         </Carousel>
       </Categories>
-      <Footer />
     </div>
   );
 };
 
-export default App;
+export default Home;

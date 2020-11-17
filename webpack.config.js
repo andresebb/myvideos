@@ -14,6 +14,9 @@ module.exports = {
     compress: true,
     port: 3000,
     publicPath: "/",
+    historyApiFallback: {
+      index: "/",
+    },
   },
 
   resolve: {
