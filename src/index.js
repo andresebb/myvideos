@@ -4,9 +4,20 @@ import App from "./routes/App";
 import reducer from "./reducers";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import useInitialState from "./hooks/useInitialState";
 
 const initialState = {
+  podcast: [],
   user: {},
+  myList: [],
+  playing: {},
 };
 
-ReactDom.render(<App />, document.getElementById("app"));
+const store = createStore(reducer, initialState);
+
+ReactDom.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);
