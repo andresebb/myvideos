@@ -4,41 +4,14 @@ import "../assets/styles/App.scss";
 import Carousel from "../components/Carousel";
 import Categories from "../components/Categories";
 import Item from "../components/Item";
+import useInitialState from "../hooks/useInitialState";
+
+const API = "https://api.audioboom.com/channels/recommended";
 
 const Home = () => {
-  const [tendencies, setTendencies] = useState([]);
   const [myList, setMyList] = useState([]);
-  const [originals, setOriginals] = useState([]);
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    try {
-      let [reqRecommended, reqOriginals] = await Promise.all([
-        fetch("https://api.audioboom.com/channels/recommended"),
-        fetch(
-          "https://api.audioboom.com//channels/recommended?category_ids[]=178"
-        ),
-      ]);
-
-      let [dataRecommended, dataOriginals] = await Promise.all([
-        await reqRecommended.json(),
-        await reqOriginals.json(),
-      ]);
-
-      const recommended = dataRecommended.body;
-      const others = dataOriginals.body;
-
-      setTendencies(recommended);
-      setOriginals(others);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log(tendencies);
+  const podcast = useInitialState(API);
 
   return (
     <div>
@@ -56,7 +29,7 @@ const Home = () => {
 
       <Categories title="Tendencies">
         <Carousel>
-          {tendencies.map((podcast) => (
+          {podcast.map((podcast) => (
             <Item
               key={podcast.id}
               title={podcast.title}
@@ -69,7 +42,7 @@ const Home = () => {
 
       <Categories title="Originals">
         <Carousel>
-          {originals.map((podcast) => (
+          {podcast.map((podcast) => (
             <Item
               key={podcast.id}
               title={podcast.title}
