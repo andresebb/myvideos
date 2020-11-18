@@ -9,7 +9,7 @@ import useInitialState from "../hooks/useInitialState";
 
 const API = "https://api.audioboom.com/channels/recommended";
 
-const Home = ({ miLista, videos }) => {
+const Home = ({ miLista, videos, user }) => {
   const podcast = useInitialState(API);
 
   return (
@@ -26,6 +26,7 @@ const Home = ({ miLista, videos }) => {
                 image={podcast.image}
                 id={podcast.id}
                 created={podcast.created}
+                isList={true}
               />
             ))}
           </Carousel>
@@ -67,6 +68,7 @@ const mapStateToProps = (state) => {
   return {
     miLista: state.myList,
     videos: state.podcasts,
+    user: state.user,
   };
 };
 

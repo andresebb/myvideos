@@ -6,7 +6,15 @@ import playIcon from "../assets/static/play-icon.png";
 import plusIcon from "../assets/static/plus-icon.png";
 import removeIcon from "../assets/static/remove.png";
 
-const Item = ({ title, image, created, id, setFavorites, deleteFavorite }) => {
+const Item = ({
+  title,
+  image,
+  created,
+  id,
+  setFavorites,
+  deleteFavorite,
+  isList,
+}) => {
   const handleSetFavorite = () => {
     setFavorites({
       title,
@@ -31,18 +39,21 @@ const Item = ({ title, image, created, id, setFavorites, deleteFavorite }) => {
               src={playIcon}
               alt="Play Icon"
             />
-            <img
-              className="carousel-item__details--img"
-              src={plusIcon}
-              alt="Plus Icon"
-              onClick={handleSetFavorite}
-            />
-            <img
-              className="carousel-item__details--img"
-              src={removeIcon}
-              alt="Remove Icon"
-              onClick={() => handleDeleteFavorite(id)}
-            />
+            {isList ? (
+              <img
+                className="carousel-item__details--img"
+                src={removeIcon}
+                alt="Remove Icon"
+                onClick={() => handleDeleteFavorite(id)}
+              />
+            ) : (
+              <img
+                className="carousel-item__details--img"
+                src={plusIcon}
+                alt="Plus Icon"
+                onClick={handleSetFavorite}
+              />
+            )}
           </div>
           <p className="carousel-item__details--title">{title}</p>
           <p className="carousel-item__details--subtitle">{created}</p>

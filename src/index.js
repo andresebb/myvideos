@@ -8,7 +8,7 @@ import useInitialState from "./hooks/useInitialState";
 
 const initialState = {
   podcast: [],
-  user: {},
+  user: [],
   myList: [],
   playing: {},
 };
